@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-plugins {
-    kotlin("jvm")
-}
 
+package com.netflix.graphql.dgs.webmvc.autoconfigure.metrics
 
-dependencies {
-    implementation(project(":graphql-dgs"))
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+import org.springframework.boot.actuate.autoconfigure.metrics.AutoTimeProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
-    implementation("org.springframework:spring-web")
-    implementation("org.springframework:spring-webmvc")
+@ConfigurationProperties("management.metrics.dgs-graphql")
+class GraphQLMetricsProperties {
 
-    testImplementation("io.mockk:mockk:1.10.3-jdk8")
-    testImplementation("io.projectreactor:reactor-test:3.4.0")
+    /** Auto-timed queries settings. */
+    @NestedConfigurationProperty
+    val autotime = AutoTimeProperties();
+
 }
